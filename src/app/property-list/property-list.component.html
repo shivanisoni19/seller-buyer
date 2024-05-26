@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Property Listings</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Place</th>
+          <th>Area</th>
+          <th>Bedrooms</th>
+          <th>Bathrooms</th>
+          <th>Hospital Nearby</th>
+          <th>School Nearby</th>
+          <th>Actions</th>
+          <th>Likes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties | paginate: { itemsPerPage: 5, currentPage: page }">
+          <td>{{ property.place }}</td>
+          <td>{{ property.area }}</td>
+          <td>{{ property.bedrooms }}</td>
+          <td>{{ property.bathrooms }}</td>
+          <td>{{ property.hospitalNearby ? 'Yes' : 'No' }}</td>
+          <td>{{ property.schoolNearby ? 'Yes' : 'No' }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editProperty(property.id)">Edit</button>
+            <button class="btn btn-info" (click)="interestedInProperty(property.id)">I'm Interested</button>
+          </td>
+          <td>
+            <button class="btn btn-secondary" (click)="likeProperty(property.id)">Like</button> {{ property.likes }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <a routerLink="/property/add" class="btn btn-success">Add Property</a>
+  </div>
+  

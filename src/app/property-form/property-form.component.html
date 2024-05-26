@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>{{ isEditMode ? 'Edit Property' : 'Add Property' }}</h2>
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="place">Place</label>
+        <input id="place" formControlName="place" class="form-control" [class.is-invalid]="place.invalid && (place.dirty || place.touched)">
+        <div *ngIf="place.invalid && (place.dirty || place.touched)" class="invalid-feedback">
+          <div *ngIf="place.errors?.required">Place is required.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="area">Area (sq ft)</label>
+        <input id="area" formControlName="area" type="number" class="form-control" [class.is-invalid]="area.invalid && (area.dirty || area.touched)">
+        <div *ngIf="area.invalid && (area.dirty || area.touched)" class="invalid-feedback">
+          <div *ngIf="area.errors?.required">Area is required.</div>
+          <div *ngIf="area.errors?.min">Area must be at least 1 sq ft.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms</label>
+        <input id="bedrooms" formControlName="bedrooms" type="number" class="form-control" [class.is-invalid]="bedrooms.invalid && (bedrooms.dirty || bedrooms.touched)">
+        <div *ngIf="bedrooms.invalid && (bedrooms.dirty || bedrooms.touched)" class="invalid-feedback">
+          <div *ngIf="bedrooms.errors?.required">Bedrooms are required.</div>
+          <div *ngIf="bedrooms.errors?.min">Bedrooms must be at least 1.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="bathrooms">Bathrooms</label>
+        <input id="bathrooms" formControlName="bathrooms" type="number" class="form-control" [class.is-invalid]="bathrooms.invalid && (bathrooms.dirty || bathrooms.touched)">
+        <div *ngIf="bathrooms.invalid && (bathrooms.dirty || bathrooms.touched)" class="invalid-feedback">
+          <div *ngIf="bathrooms.errors?.required">Bathrooms are required.</div>
+          <div *ngIf="bathrooms.errors?.min">Bathrooms must be at least 1.</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="hospitalNearby">Hospital Nearby</label>
+        <input id="hospitalNearby" formControlName="hospitalNearby" type="checkbox">
+      </div>
+  
+      <div class="form-group">
+        <label for="schoolNearby">School Nearby</label>
+        <input id="schoolNearby" formControlName="schoolNearby" type="checkbox">
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="propertyForm.invalid">
+        {{ isEditMode ? 'Update Property' : 'Add Property' }}
+      </button>
+    </form>
+  </div>
+  
